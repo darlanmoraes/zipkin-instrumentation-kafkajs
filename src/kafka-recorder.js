@@ -10,7 +10,7 @@ function extractB3XHeaders(message) {
   const headers = message.headers;
   if (headers.b3) {
     const TRACE_ID = 0, SPAN_ID = 1, FLAGS = 2;
-    const B3 = headers.B3.toString().split("-");
+    const B3 = headers.b3.toString().split("-");
     message.headers[HttpHeaders.TraceId] = B3[TRACE_ID];
     message.headers[HttpHeaders.SpanId] = B3[SPAN_ID];
     message.headers[HttpHeaders.Flags] = B3[FLAGS];
