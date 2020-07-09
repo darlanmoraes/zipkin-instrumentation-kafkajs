@@ -1,6 +1,7 @@
 # zipkin-instrumentation-kafkajs
 
 [FORKED FROM - https://github.com/openzipkin/zipkin-js/tree/master/packages/zipkin-instrumentation-kafkajs](https://github.com/openzipkin/zipkin-js/tree/master/packages/zipkin-instrumentation-kafkajs)
+This package was created to make the instrumentation work with Spring Sleuth.
 
 ![npm](https://img.shields.io/npm/dm/zipkin-instrumentation-kafkajs.svg)
 
