@@ -6,7 +6,19 @@ function bufferToAscii(maybeBuffer) { // TODO: backfill tests for this
   return Buffer.isBuffer(maybeBuffer) ? maybeBuffer.asciiSlice(0) : maybeBuffer;
 }
 
+function extractB3XHeaders(message) {
+  const headers = message.headers;
+  if (headers.b3) {
+    const TRACE_ID = 0, SPAN_ID = 1, FLAGS = 2;
+    const B3 = headers.B3.toString().split("-");
+    message.headers[HttpHeaders.TraceId] = B3[TRACE_ID];
+    message.headers[HttpHeaders.SpanId] = B3[SPAN_ID];
+    message.headers[HttpHeaders.Flags] = B3[FLAGS];
+  }
+}
+
 const recordConsumeStart = (tracer, name, remoteServiceName, {topic, partition, message}) => {
+  extractB3XHeaders(message);
   const traceId = message.headers[HttpHeaders.TraceId];
   const spanId = message.headers[HttpHeaders.SpanId];
   let id;
